@@ -1,6 +1,11 @@
 <?php
 namespace Bpi\Sdk;
-
+/**
+ * Class ResponseStatus
+ * Check status of response.
+ *
+ * @package Bpi\Sdk
+ */
 class ResponseStatus
 {
     protected $status;

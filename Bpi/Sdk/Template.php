@@ -3,6 +3,11 @@ namespace Bpi\Sdk;
 
 use Symfony\Component\DomCrawler\Crawler;
 
+/**
+ * Class Template
+ *
+ * @package Bpi\Sdk
+ */
 class Template
 {
     /**

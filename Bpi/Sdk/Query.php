@@ -3,6 +3,12 @@ namespace Bpi\Sdk;
 
 use Symfony\Component\DomCrawler\Crawler;
 
+/**
+ * Class Query
+ * Prepare query.
+ *
+ * @package Bpi\Sdk
+ */
 class Query
 {
     /**
