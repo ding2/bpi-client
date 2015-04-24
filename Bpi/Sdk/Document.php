@@ -234,7 +234,7 @@ class Document implements \Iterator, \Countable
     {
         $crawler = new Crawler($this->crawler->current());
         return $crawler->filter('item property')->each(function($e) use($callback) {
-            $sxml = simplexml_import_dom($e);
+            $sxml = simplexml_import_dom($e->getNode(0));
             $callback(current($sxml->attributes()) + array('@value' => (string) $sxml));
         });
     }
