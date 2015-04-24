@@ -3,6 +3,12 @@ namespace Bpi\Sdk;
 
 use Symfony\Component\DomCrawler\Crawler;
 
+/**
+ * Class Link
+ * Prepare URI for request.
+ *
+ * @package Bpi\Sdk
+ */
 class Link
 {
     /**

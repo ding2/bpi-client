@@ -1,6 +1,11 @@
 <?php
 require_once __DIR__ . '/../../vendor/autoload.php';
 
+
+/**
+ * Class Bpi
+ * Bpi client.
+ */
 class Bpi
 {
     /**
@@ -80,7 +85,7 @@ class Bpi
     /**
      * Push new node to BPI
      *
-     * @param array $data
+     * @param array $data of node which will be pushed to service.
      * @throws \InvalidArgumentException
      * @return \Bpi\Sdk\Item\Node
      */

@@ -3,6 +3,11 @@ namespace Bpi\Sdk\Item;
 
 use Bpi\Sdk\Document;
 
+/**
+ * Class BaseItem
+ *
+ * @package Bpi\Sdk\Item
+ */
 class BaseItem
 {
     protected $document;

@@ -1,6 +1,12 @@
 <?php
 namespace Bpi\Sdk;
 
+/**
+ * Class Authorization
+ * Prepare authorization credentials.
+ *
+ * @package Bpi\Sdk
+ */
 class Authorization
 {
     protected $agency_id;
