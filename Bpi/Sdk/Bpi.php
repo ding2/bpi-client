@@ -93,13 +93,15 @@ class Bpi
         $nodes = clone $this->endpoint;
         $nodes->firstItem('name', 'node')
             ->template('push')
-            ->eachField(function ($field) use ($data) {
-                if (!isset($data[(string) $field])) {
-                    throw new \InvalidArgumentException(sprintf('Field [%s] is required', (string) $field));
-                }
+            ->eachField(
+                function ($field) use ($data) {
+                    if (!isset($data[(string) $field])) {
+                        throw new \InvalidArgumentException(sprintf('Field [%s] is required', (string) $field));
+                    }
 
-                $field->setValue($data[(string) $field]);
-            })->post($node);
+                    $field->setValue($data[(string) $field]);
+                }
+            )->post($node);
 
         $this->current_document = $node;
 
@@ -208,9 +210,11 @@ class Bpi
         $dictionary = array();
         foreach ($result as $item) {
             $properties = array();
-            $item->walkProperties(function ($property) use (&$properties) {
-                $properties[$property['name']] = $property['@value'];
-            });
+            $item->walkProperties(
+                function ($property) use (&$properties) {
+                    $properties[$property['name']] = $property['@value'];
+                }
+            );
 
             $dictionary[$properties['group']][] = $properties['name'];
         }

@@ -22,17 +22,19 @@ class BaseItem
     public function getProperties()
     {
         $properties = array();
-        $this->document->walkProperties(function ($e) use (&$properties) {
-            if (isset($properties[$e['name']])) {
-                if (is_array($properties[$e['name']])) {
-                    $properties[$e['name']][] = $e['@value'];
+        $this->document->walkProperties(
+            function ($e) use (&$properties) {
+                if (isset($properties[$e['name']])) {
+                    if (is_array($properties[$e['name']])) {
+                        $properties[$e['name']][] = $e['@value'];
+                    } else {
+                        $properties[$e['name']] = array($properties[$e['name']], $e['@value']);
+                    }
                 } else {
-                    $properties[$e['name']] = array($properties[$e['name']], $e['@value']);
+                    $properties[$e['name']] = $e['@value'];
                 }
-            } else {
-                $properties[$e['name']] = $e['@value'];
             }
-        });
+        );
 
         return $properties;
     }

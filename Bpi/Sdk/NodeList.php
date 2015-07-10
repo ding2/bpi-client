@@ -29,9 +29,11 @@ class NodeList implements \Iterator, \Countable
             $this->document->reduceItemsByAttr('type', 'entity');
             $self = $this;
             $document->firstItem('type', 'collection')
-                ->walkProperties(function ($property) use ($self) {
-                    $self->$property['name'] = $property['@value'];
-                });
+                ->walkProperties(
+                    function ($property) use ($self) {
+                        $self->$property['name'] = $property['@value'];
+                    }
+                );
         } catch (Exception\EmptyList $e) {
             $this->document->clear();
         }

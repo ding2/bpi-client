@@ -126,8 +126,7 @@ class Document implements \Iterator, \Countable
         try {
             $crawler = $this->crawler
                 ->filter("hypermedia > link[rel='{$rel}']")
-                ->first()
-            ;
+                ->first();
 
             return new Link($crawler);
         } catch (\InvalidArgumentException $e) {
@@ -158,9 +157,8 @@ class Document implements \Iterator, \Countable
     {
         try {
             $query = $this->crawler
-                  ->filter("hypermedia > query[rel='{$rel}']")
-                  ->first()
-            ;
+                ->filter("hypermedia > query[rel='{$rel}']")
+                ->first();
 
             return new Query($query);
         } catch (\InvalidArgumentException $e) {
@@ -192,9 +190,8 @@ class Document implements \Iterator, \Countable
     {
         try {
             $query = $this->crawler
-                  ->filter("hypermedia > template[rel='{$rel}']")
-                  ->first()
-            ;
+                ->filter("hypermedia > template[rel='{$rel}']")
+                ->first();
 
             return new Template($query);
         } catch (\InvalidArgumentException $e) {
@@ -231,10 +228,12 @@ class Document implements \Iterator, \Countable
     {
         $crawler = new Crawler($this->crawler->current());
 
-        return $crawler->filter('item property')->each(function ($e) use ($callback) {
-            $sxml = simplexml_import_dom($e->getNode(0));
-            $callback(current($sxml->attributes()) + array('@value' => (string) $sxml));
-        });
+        return $crawler->filter('item property')->each(
+            function ($e) use ($callback) {
+                $sxml = simplexml_import_dom($e->getNode(0));
+                $callback(current($sxml->attributes()) + array('@value' => (string) $sxml));
+            }
+        );
     }
 
     /**
@@ -245,9 +244,11 @@ class Document implements \Iterator, \Countable
     public function propertiesToArray()
     {
         $properties = array();
-        $this->walkProperties(function ($p) use (&$properties) {
-            $properties[$p['name']] = $p['@value'];
-        });
+        $this->walkProperties(
+            function ($p) use (&$properties) {
+                $properties[$p['name']] = $p['@value'];
+            }
+        );
 
         return $properties;
     }
@@ -266,8 +267,7 @@ class Document implements \Iterator, \Countable
     {
         $this->crawler = $this->crawler
             ->filter("item[$attr='{$value}']")
-            ->first()
-        ;
+            ->first();
 
         if (!$this->crawler->count()) {
             throw new \InvalidArgumentException(sprintf('Item with attribute "%s" and value "%s" was not found', $attr, $value));
