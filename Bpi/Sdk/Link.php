@@ -1,17 +1,15 @@
 <?php
+
 namespace Bpi\Sdk;
 
 use Symfony\Component\DomCrawler\Crawler;
 
 /**
  * Class Link contain methods which prepare URI for different type of requests.
- *
- * @package Bpi\Sdk
  */
 class Link
 {
     /**
-     *
      * @var \Symfony\Component\DomCrawler\Crawler
      */
     protected $crawler;
@@ -28,7 +26,7 @@ class Link
     }
 
     /**
-     * Try crawler for consistency of data
+     * Try crawler for consistency of data.
      *
      * @throws Exception\UndefinedHypermedia
      *
@@ -40,8 +38,9 @@ class Link
             $this->crawler->attr('href');
             $this->crawler->attr('rel');
         } catch (\InvalidArgumentException $e) {
-          throw  $e;
-          throw new Exception\UndefinedHypermedia();
+            throw  $e;
+            throw new Exception\UndefinedHypermedia();
+
             return false;
         }
 
@@ -49,7 +48,6 @@ class Link
     }
 
     /**
-     *
      * @param \Bpi\Sdk\Document $document
      */
     public function follow(Document $document)
@@ -58,7 +56,7 @@ class Link
     }
 
     /**
-     * Perform HTTP GET for given URI
+     * Perform HTTP GET for given URI.
      *
      * @param \Bpi\Sdk\Document $document
      */
@@ -68,7 +66,7 @@ class Link
     }
 
     /**
-     * Perform HTTP POST for given URI
+     * Perform HTTP POST for given URI.
      *
      * @param \Bpi\Sdk\Document $document
      */
@@ -78,7 +76,7 @@ class Link
     }
 
     /**
-     * Perform HTTP DELETE for given URI
+     * Perform HTTP DELETE for given URI.
      *
      * @param \Bpi\Sdk\Document $document
      */
@@ -88,7 +86,7 @@ class Link
     }
 
     /**
-     * Perform HTTP PUT for given URI
+     * Perform HTTP PUT for given URI.
      *
      * @param \Bpi\Sdk\Document $document
      */
@@ -98,19 +96,17 @@ class Link
     }
 
     /**
-     *
      * @return array properties
      */
     public function toArray()
     {
         $properties = array();
-        foreach($this->crawler as $node)
-        {
-            foreach ($node->attributes as $attr_name => $attr)
-            {
+        foreach ($this->crawler as $node) {
+            foreach ($node->attributes as $attr_name => $attr) {
                 $properties[$attr_name] = $attr->value;
             }
         }
+
         return $properties;
     }
 }

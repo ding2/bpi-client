@@ -1,15 +1,13 @@
 <?php
+
 namespace Bpi\Sdk\Template;
 
 /**
- * Class Field
- *
- * @package Bpi\Sdk\Template
+ * Class Field.
  */
 class Field
 {
     /**
-     *
      * @var \DOMNode
      */
     protected $node;

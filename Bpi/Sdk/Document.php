@@ -1,4 +1,5 @@
 <?php
+
 namespace Bpi\Sdk;
 
 use Goutte\Client;
@@ -6,8 +7,6 @@ use Symfony\Component\DomCrawler\Crawler;
 
 /**
  * Class Document represent methods for entity processing.
- *
- * @package Bpi\Sdk
  */
 class Document implements \Iterator, \Countable
 {
@@ -27,7 +26,7 @@ class Document implements \Iterator, \Countable
     protected $crawler;
 
     /**
-     * @param \Goutte\Client $client
+     * @param \Goutte\Client         $client
      * @param \Bpi\Sdk\Authorization $authorization
      */
     public function __construct(Client $client, Authorization $authorization)
@@ -38,20 +37,22 @@ class Document implements \Iterator, \Countable
 
     /**
      * @param string $endpoint API URL
+     *
      * @return \Bpi\Sdk\Document same instance
      */
     public function loadEndpoint($endpoint)
     {
         $this->request('GET', $endpoint);
+
         return $this;
     }
 
     /**
-     * Gateway to make direct requests to API
+     * Gateway to make direct requests to API.
      *
      * @param string $method
      * @param string $uri
-     * @param array $params
+     * @param array  $params
      *
      * @return \Bpi\Sdk\Document same instance
      */
@@ -66,13 +67,14 @@ class Document implements \Iterator, \Countable
         $this->crawler = $this->crawler->filter('bpi > item');
         $this->crawler->rewind();
 
-        if ($this->status()->isError())
-        {
-            if ($this->status()->isClientError())
+        if ($this->status()->isError()) {
+            if ($this->status()->isClientError()) {
                 throw new Exception\HTTP\ClientError($this->http_client->getResponse()->getContent(), $this->status()->getCode());
+            }
 
-            if ($this->status()->isServerError())
+            if ($this->status()->isServerError()) {
                 throw new Exception\HTTP\ServerError($this->http_client->getResponse()->getContent(), $this->status()->getCode());
+            }
 
             throw new Exception\HTTP\Error($this->http_client->getResponse()->getContent(), $this->status()->getCode());
         }
@@ -81,7 +83,7 @@ class Document implements \Iterator, \Countable
     }
 
     /**
-     * Get last response status
+     * Get last response status.
      *
      * @return \Bpi\Sdk\ResponseStatus
      */
@@ -91,7 +93,7 @@ class Document implements \Iterator, \Countable
     }
 
     /**
-     * Dump latest raw response data
+     * Dump latest raw response data.
      *
      * @return string
      */
@@ -101,7 +103,7 @@ class Document implements \Iterator, \Countable
     }
 
     /**
-     * Dump latest raw request data
+     * Dump latest raw request data.
      *
      * @return string
      */
@@ -114,7 +116,9 @@ class Document implements \Iterator, \Countable
      * Access hypermedia link.
      *
      * @throws Exception\UndefinedHypermedia
+     *
      * @param string $rel
+     *
      * @return \Bpi\Sdk\Link
      */
     public function link($rel)
@@ -126,9 +130,7 @@ class Document implements \Iterator, \Countable
             ;
 
             return new Link($crawler);
-        }
-        catch (\InvalidArgumentException $e)
-        {
+        } catch (\InvalidArgumentException $e) {
             throw new Exception\UndefinedHypermedia(sprintf('There is no such link [%s]', $rel));
         }
     }
@@ -147,22 +149,21 @@ class Document implements \Iterator, \Countable
      * Access hypermedia query.
      *
      * @throws Exception\UndefinedHypermedia
+     *
      * @param string $rel
+     *
      * @return \Bpi\Sdk\Query
      */
     public function query($rel)
     {
-        try
-        {
+        try {
             $query = $this->crawler
                   ->filter("hypermedia > query[rel='{$rel}']")
                   ->first()
             ;
 
             return new Query($query);
-        }
-        catch (\InvalidArgumentException $e)
-        {
+        } catch (\InvalidArgumentException $e) {
             throw new Exception\UndefinedHypermedia(sprintf('There is no query [%s]', $rel));
         }
     }
@@ -171,7 +172,7 @@ class Document implements \Iterator, \Countable
      * Send query.
      *
      * @param \Bpi\Sdk\Query $query
-     * @param array $params
+     * @param array          $params
      */
     public function sendQuery(Query $query, $params)
     {
@@ -182,22 +183,21 @@ class Document implements \Iterator, \Countable
      * Access hypermedia template.
      *
      * @throws Exception\UndefinedHypermedia
+     *
      * @param string $rel
+     *
      * @return \Bpi\Sdk\Template
      */
     public function template($rel)
     {
-        try
-        {
+        try {
             $query = $this->crawler
                   ->filter("hypermedia > template[rel='{$rel}']")
                   ->first()
             ;
 
             return new Template($query);
-        }
-        catch (\InvalidArgumentException $e)
-        {
+        } catch (\InvalidArgumentException $e) {
             throw new Exception\UndefinedHypermedia(sprintf('There is no such template [%s]', $rel));
         }
     }
@@ -213,9 +213,10 @@ class Document implements \Iterator, \Countable
     }
 
     /**
-     * Checks current item type
+     * Checks current item type.
      *
      * @param string $type
+     *
      * @return bool
      */
     public function isTypeOf($type)
@@ -224,12 +225,13 @@ class Document implements \Iterator, \Countable
     }
 
     /**
-     * Iterates over all properties of current item
+     * Iterates over all properties of current item.
      */
     public function walkProperties($callback)
     {
         $crawler = new Crawler($this->crawler->current());
-        return $crawler->filter('item property')->each(function($e) use($callback) {
+
+        return $crawler->filter('item property')->each(function ($e) use ($callback) {
             $sxml = simplexml_import_dom($e->getNode(0));
             $callback(current($sxml->attributes()) + array('@value' => (string) $sxml));
         });
@@ -237,12 +239,13 @@ class Document implements \Iterator, \Countable
 
     /**
      * Convert xml to php array.
+     *
      * @return array
      */
     public function propertiesToArray()
     {
         $properties = array();
-        $this->walkProperties(function($p) use(&$properties){
+        $this->walkProperties(function ($p) use (&$properties) {
             $properties[$p['name']] = $p['@value'];
         });
 
@@ -250,37 +253,43 @@ class Document implements \Iterator, \Countable
     }
 
     /**
-     * Finds first matched item by attribute value
+     * Finds first matched item by attribute value.
      *
      * @param string $name
-     * @param mixed $value
+     * @param mixed  $value
+     *
      * @throws \InvalidArgumentException
      *
      * @return \Bpi\Sdk\Document same instance
      */
-    public function firstItem($attr, $value) {
+    public function firstItem($attr, $value)
+    {
         $this->crawler = $this->crawler
             ->filter("item[$attr='{$value}']")
             ->first()
         ;
 
-        if (!$this->crawler->count())
+        if (!$this->crawler->count()) {
             throw new \InvalidArgumentException(sprintf('Item with attribute "%s" and value "%s" was not found', $attr, $value));
+        }
 
         $this->crawler->rewind();
+
         return $this;
     }
 
     /**
-     * Filter items (<item> tags) by attribute values
+     * Filter items (<item> tags) by attribute values.
      *
      * @param string $name
-     * @param mixed $value
+     * @param mixed  $value
+     *
      * @throws \Bpi\Sdk\Exception\EmptyList
      *
      * @return \Bpi\Sdk\Document same instance
      */
-    public function reduceItemsByAttr($attr, $value) {
+    public function reduceItemsByAttr($attr, $value)
+    {
         $this->crawler = $this->crawler->filter("item[$attr='{$value}']");
 
         if (!$this->crawler->count()) {
@@ -288,11 +297,12 @@ class Document implements \Iterator, \Countable
         }
 
         $this->crawler->rewind();
+
         return $this;
     }
 
     /**
-     * Clear previous response if any
+     * Clear previous response if any.
      */
     public function clear()
     {
@@ -300,59 +310,61 @@ class Document implements \Iterator, \Countable
     }
 
     /**
-     * Iterator interface implementation
+     * Iterator interface implementation.
      *
      * @group Iterator
      */
-    function rewind()
+    public function rewind()
     {
         $this->crawler->rewind();
     }
 
     /**
-     * Returns same instance but with internal pointer to current item in collection
+     * Returns same instance but with internal pointer to current item in collection.
      *
      * @group Iterator
+     *
      * @return \Bpi\Sdk\Document will return same instance
      */
-    function current()
+    public function current()
     {
         return $this;
     }
 
     /**
-     * Key of current iteration position
+     * Key of current iteration position.
      *
      * @group Iterator
      */
-    function key()
+    public function key()
     {
         return $this->crawler->key();
     }
 
     /**
-     * Iterate to next item
+     * Iterate to next item.
      *
      * @group Iterator
      */
-    function next()
+    public function next()
     {
         $this->crawler->next();
     }
 
     /**
-     * Checks if is ready for iteration
+     * Checks if is ready for iteration.
      *
      * @group Iterator
-     * @return boolean
+     *
+     * @return bool
      */
-    function valid()
+    public function valid()
     {
         return $this->crawler->valid();
     }
 
     /**
-     * Length of items in document
+     * Length of items in document.
      *
      * @group Iterator
      */
