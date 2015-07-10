@@ -2,8 +2,7 @@
 namespace Bpi\Sdk;
 
 /**
- * Class Authorization
- * Prepare authorization credentials.
+ * Class Authorization prepare authorization credentials.
  *
  * @package Bpi\Sdk
  */
@@ -15,7 +14,6 @@ class Authorization
     protected $token;
 
     /**
-     *
      * @param string $agency_id
      * @param string $public_key
      * @param string $secret_key

@@ -2,8 +2,7 @@
 namespace Bpi\Sdk\Exception;
 
 /**
- * Class UndefinedHypermedia
- * Exception class for hypermedia errors.
+ * Class UndefinedHypermedia exception class for hypermedia errors.
  *
  * @package Bpi\Sdk\Exception
  */

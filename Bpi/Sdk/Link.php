@@ -4,8 +4,7 @@ namespace Bpi\Sdk;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**
- * Class Link
- * Prepare URI for request.
+ * Class Link contain methods which prepare URI for different type of requests.
  *
  * @package Bpi\Sdk
  */
@@ -27,11 +26,11 @@ class Link
         $this->crawler = $crawler;
         $this->testConsistency();
     }
-    
+
     /**
      * Try crawler for consistency of data
-     * 
-     * @throws Exception\InvalidHypermedia
+     *
+     * @throws Exception\UndefinedHypermedia
      *
      * @returns bool
      */
@@ -50,7 +49,7 @@ class Link
     }
 
     /**
-     * 
+     *
      * @param \Bpi\Sdk\Document $document
      */
     public function follow(Document $document)
@@ -99,7 +98,7 @@ class Link
     }
 
     /**
-     * 
+     *
      * @return array properties
      */
     public function toArray()

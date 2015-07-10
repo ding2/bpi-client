@@ -22,7 +22,6 @@ class Field
     protected $value;
 
     /**
-     * 
      * @param \DOMNode $node
      */
     public function __construct(\DOMNode $node)

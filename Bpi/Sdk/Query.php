@@ -4,8 +4,7 @@ namespace Bpi\Sdk;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**
- * Class Query
- * Prepare query.
+ * Class Query prepare query string which will be send to web service.
  *
  * @package Bpi\Sdk
  */
@@ -13,12 +12,12 @@ class Query
 {
     /**
      *
-     * @var Symfony\Component\DomCrawler\Crawler
+     * @var \Symfony\Component\DomCrawler\Crawler
      */
     protected $crawler;
 
     /**
-     * 
+     *
      * @param \Symfony\Component\DomCrawler\Crawler $crawler
      */
     public function __construct(Crawler $crawler)
@@ -30,7 +29,7 @@ class Query
     /**
      * Try crawler for consistency of data
      *
-     * @throws Exception\InvalidHypermedia
+     * @throws Exception\UndefinedHypermedia
      *
      * @returns bool
      */
@@ -48,7 +47,8 @@ class Query
     }
 
     /**
-     * 
+     * Validate parameters added to query.
+     *
      * @param array $params
      * @throws Exception\InvalidQueryParameter
      */
@@ -73,10 +73,10 @@ class Query
             }
         }
     }
-    
+
     /**
      * Transform query to array
-     * 
+     *
      * @return array
      */
     public function toArray()
@@ -89,7 +89,7 @@ class Query
                 $result[$attr_name] = $attr->value;
             }
         }
-        
+
         foreach ($this->crawler->filter('param') as $node)
         {
             foreach ($node->attributes as $attr_name => $attr)
@@ -97,11 +97,12 @@ class Query
                 $result['params'][$attr_name] = $attr->value;
             }
         }
-        
+
         return $result;
     }
 
     /**
+     * Prepare URI for WS request.
      *
      * @param array $params
      * @return string URI
@@ -113,7 +114,8 @@ class Query
     }
 
     /**
-     * 
+     * Send request to WS with prepared query.
+     *
      * @param \Bpi\Sdk\Document $document
      * @param array $params multidimensional arrays as well
      */

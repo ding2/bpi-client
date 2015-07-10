@@ -2,7 +2,7 @@
 namespace Bpi\Sdk\Exception;
 
 /**
- * Class EmptyList
+ * Class EmptyList exception class for empty results.
  *
  * @package Bpi\Sdk\Exception
  */

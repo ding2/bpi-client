@@ -3,31 +3,26 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 
 
 /**
- * Class Bpi
- * Bpi client.
+ * Class Bpi represents methods for requests to REST server.
  */
 class Bpi
 {
     /**
-     *
      * @var \Goutte\Client
      */
     protected $client;
 
     /**
-     *
      * @var \Bpi\Sdk\Authorization
      */
     protected $authorization;
 
     /**
-     *
      * @var \Bpi\Sdk\Document
      */
     protected $endpoint;
 
     /**
-     *
      * @var \Bpi\Sdk\Document
      */
     protected $current_document;
@@ -59,7 +54,7 @@ class Bpi
     }
 
     /**
-     * Get list of node based on some conditions
+     * Get list of node based on conditions
      *
      * @param array $queries available keys are: amount, offset, filter, sort
      *   filter and sort requires nested arrays
@@ -218,10 +213,9 @@ class Bpi
     }
 
     /**
-     *
      * @return \Bpi\Sdk\Document
      */
-    public function _getCurrentDocument()
+    protected function _getCurrentDocument()
     {
         return $this->current_document;
     }

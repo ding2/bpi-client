@@ -2,8 +2,7 @@
 namespace Bpi\Sdk\Exception;
 
 /**
- * Class InvalidQueryParameter
- * Exception class for query errors.
+ * Class InvalidQueryParameter exception class for query parameter errors.
  *
  * @package Bpi\Sdk\Exception
  */

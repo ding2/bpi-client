@@ -2,8 +2,8 @@
 namespace Bpi\Sdk\Exception\HTTP;
 
 /**
- * Class ServerError
- * Exception class for server errors.
+ * Class ServerError exception class for server errors
+ *  got from HTTP request.
  *
  * @package Bpi\Sdk\Exception\HTTP
  */

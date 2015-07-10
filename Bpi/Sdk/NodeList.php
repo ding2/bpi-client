@@ -4,8 +4,7 @@ namespace Bpi\Sdk;
 use Bpi\Sdk\Document;
 
 /**
- * Class NodeList
- * Interact with list of nodes.
+ * Class NodeList interact with list of nodes.
  *
  * @package Bpi\Sdk
  */

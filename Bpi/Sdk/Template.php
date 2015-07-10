@@ -4,26 +4,24 @@ namespace Bpi\Sdk;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**
- * Class Template
+ * Class Template contains methods to render entity.
  *
  * @package Bpi\Sdk
  */
 class Template
 {
     /**
-     *
-     * @var Symfony\Component\DomCrawler\Crawler
+     * @var \Symfony\Component\DomCrawler\Crawler
      */
     protected $crawler;
 
     /**
-     *
-     * @var array
+     * @var array of fields.
      */
     protected $fields = array();
 
     /**
-     * 
+     *
      * @param \Symfony\Component\DomCrawler\Crawler $crawler
      */
     public function __construct(Crawler $crawler)
@@ -35,7 +33,7 @@ class Template
     /**
      * Try crawler for consistency of data
      *
-     * @throws Exception\InvalidHypermedia
+     * @throws Exception\UndefinedHypermedia
      *
      * @returns bool
      */
@@ -69,6 +67,7 @@ class Template
     }
 
     /**
+     * Send post request to WS.
      *
      * @param \Bpi\Sdk\Document $document
      */

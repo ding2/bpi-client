@@ -2,8 +2,7 @@
 namespace Bpi\Sdk\Exception;
 
 /**
- * Class SDKException
- * Main exception class.
+ * Class SDKException main exception class.
  *
  * @package Bpi\Sdk\Exception
  */

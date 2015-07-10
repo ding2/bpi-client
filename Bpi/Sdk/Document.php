@@ -5,32 +5,28 @@ use Goutte\Client;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**
- * Class Document
+ * Class Document represent methods for entity processing.
  *
  * @package Bpi\Sdk
  */
 class Document implements \Iterator, \Countable
 {
     /**
-     *
      * @var \Goutte\Client
      */
     protected $http_client;
 
     /**
-     *
      * @var \Bpi\Sdk\Authorization
      */
     protected $authorization;
 
     /**
-     *
      * @var \Symfony\Component\DomCrawler\Crawler
      */
     protected $crawler;
 
     /**
-     *
      * @param \Goutte\Client $client
      * @param \Bpi\Sdk\Authorization $authorization
      */
@@ -240,7 +236,7 @@ class Document implements \Iterator, \Countable
     }
 
     /**
-     *
+     * Convert xml to php array.
      * @return array
      */
     public function propertiesToArray()
