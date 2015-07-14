@@ -4,6 +4,7 @@ namespace Bpi\Sdk\Item;
 
 /**
  * Class Node.
+ *
  * @package Bpi\Sdk\Item
  *
  * Base node methods
