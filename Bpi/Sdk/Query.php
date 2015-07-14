@@ -15,7 +15,7 @@ class Query
     protected $crawler;
 
     /**
-     * Initiate object
+     * Initiate object.
      *
      * @param \Symfony\Component\DomCrawler\Crawler $crawler
      */

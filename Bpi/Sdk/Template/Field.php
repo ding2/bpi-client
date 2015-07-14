@@ -20,7 +20,7 @@ class Field
     protected $value;
 
     /**
-     * Initiate object
+     * Initiate object.
      *
      * @param \DOMNode $node
      */

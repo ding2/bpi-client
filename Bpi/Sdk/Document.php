@@ -36,7 +36,7 @@ class Document implements \Iterator, \Countable
     }
 
     /**
-     * Load web service
+     * Load web service.
      *
      * @param string $endpoint API URL
      *
@@ -265,7 +265,8 @@ class Document implements \Iterator, \Countable
      * Finds first matched item by attribute value.
      *
      * @param string $attr
-     * @param mixed $value
+     * @param mixed  $value
+     *
      * @throws \InvalidArgumentException
      *
      * @return \Bpi\Sdk\Document same instance
@@ -289,7 +290,8 @@ class Document implements \Iterator, \Countable
      * Filter items (<item> tags) by attribute values.
      *
      * @param string $attr
-     * @param mixed $value
+     * @param mixed  $value
+     *
      * @throws \Bpi\Sdk\Exception\EmptyList
      *
      * @return \Bpi\Sdk\Document same instance
@@ -341,6 +343,7 @@ class Document implements \Iterator, \Countable
      * Key of current iteration position.
      *
      * @group Iterator
+     *
      * @return string
      */
     public function key()
@@ -374,7 +377,8 @@ class Document implements \Iterator, \Countable
      * Length of items in document.
      *
      * @group Iterator
-     * @return integer
+     *
+     * @return int
      */
     public function count()
     {

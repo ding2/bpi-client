@@ -3,7 +3,7 @@
 namespace Bpi\Sdk\Item;
 
 /**
- * Class Node
+ * Class Node.
  * @package Bpi\Sdk\Item
  *
  * Base node methods
@@ -28,7 +28,7 @@ class Node extends BaseItem
     }
 
     /**
-     * Syndicate node from web service
+     * Syndicate node from web service.
      */
     public function syndicate()
     {
@@ -36,7 +36,7 @@ class Node extends BaseItem
     }
 
     /**
-     * Push node to web service
+     * Push node to web service.
      */
     public function push()
     {
@@ -44,7 +44,7 @@ class Node extends BaseItem
     }
 
     /**
-     * Mark node as deleted on web service
+     * Mark node as deleted on web service.
      */
     public function delete()
     {

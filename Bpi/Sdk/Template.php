@@ -20,7 +20,7 @@ class Template
     protected $fields = array();
 
     /**
-     * Initiate object
+     * Initiate object.
      *
      * @param \Symfony\Component\DomCrawler\Crawler $crawler
      */

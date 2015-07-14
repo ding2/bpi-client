@@ -11,16 +11,14 @@ use Bpi\Sdk\Exception as Exception;
 class Link
 {
     /**
-<<<<<<< HEAD
-     * Document crawler
-=======
->>>>>>> d764d1754304dc514fe2091e57cd64295ad957a2
+     * Document crawler.
+     *
      * @var \Symfony\Component\DomCrawler\Crawler
      */
     protected $crawler;
 
     /**
-     * Initiate object
+     * Initiate object.
      *
      * @throws Exception\UndefinedHypermedia
      *
@@ -52,7 +50,7 @@ class Link
     }
 
     /**
-     * Call request method
+     * Call request method.
      *
      * @param \Bpi\Sdk\Document $document
      */
@@ -102,7 +100,7 @@ class Link
     }
 
     /**
-     * Convert properties to array
+     * Convert properties to array.
      *
      * @return array properties
      */

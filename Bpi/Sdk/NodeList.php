@@ -21,7 +21,7 @@ class NodeList implements \Iterator, \Countable
     protected $document;
 
     /**
-     * Initiate object
+     * Initiate object.
      *
      * @param \Bpi\Sdk\Document $document
      */
@@ -56,6 +56,7 @@ class NodeList implements \Iterator, \Countable
      * Returns same instance but with internal pointer to current item in collection.
      *
      * @group Iterator
+     *
      * @return \Bpi\Sdk\Item\Node will return same instance
      */
     public function current()
@@ -96,7 +97,7 @@ class NodeList implements \Iterator, \Countable
     }
 
     /**
-     * Count documents
+     * Count documents.
      *
      * @return int
      */

@@ -225,7 +225,7 @@ class Bpi
     }
 
     /**
-     * Get current document
+     * Get current document.
      *
      * @return \Bpi\Sdk\Document
      */

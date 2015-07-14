@@ -13,7 +13,7 @@ class ResponseStatus
     protected $status;
 
     /**
-     * Initiate object
+     * Initiate object.
      *
      * @param int $status_code
      *
@@ -29,7 +29,7 @@ class ResponseStatus
     }
 
     /**
-     * Convert current status to string
+     * Convert current status to string.
      *
      * @return string with current status
      */
@@ -39,7 +39,7 @@ class ResponseStatus
     }
 
     /**
-     * Return status code of finished request
+     * Return status code of finished request.
      *
      * @return string current status code
      */
@@ -49,7 +49,7 @@ class ResponseStatus
     }
 
     /**
-     * Check if request was successful
+     * Check if request was successful.
      *
      * @return bool if status successful
      */
@@ -59,7 +59,7 @@ class ResponseStatus
     }
 
     /**
-     * Check if error code is client error
+     * Check if error code is client error.
      *
      * @return bool if status code is client error
      */
@@ -69,7 +69,7 @@ class ResponseStatus
     }
 
     /**
-     * Check if error code is server error
+     * Check if error code is server error.
      *
      * @return bool if status code is server error
      */
@@ -79,7 +79,7 @@ class ResponseStatus
     }
 
     /**
-     * Check if error response
+     * Check if error response.
      *
      * @return bool if status code is error
      */
