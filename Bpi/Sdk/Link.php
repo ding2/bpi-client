@@ -2,6 +2,7 @@
 namespace Bpi\Sdk;
 
 use Symfony\Component\DomCrawler\Crawler;
+use Bpi\Sdk\Exception as Exception;
 
 /**
  * Class Link contain methods which prepare URI for different type of requests.
@@ -11,12 +12,14 @@ use Symfony\Component\DomCrawler\Crawler;
 class Link
 {
     /**
-     *
+     * Document crawler
      * @var \Symfony\Component\DomCrawler\Crawler
      */
     protected $crawler;
 
     /**
+     * Initiate object
+     *
      * @throws Exception\UndefinedHypermedia
      *
      * @param \Symfony\Component\DomCrawler\Crawler $crawler
@@ -32,7 +35,7 @@ class Link
      *
      * @throws Exception\UndefinedHypermedia
      *
-     * @returns bool
+     * @return bool
      */
     protected function testConsistency()
     {
@@ -40,15 +43,14 @@ class Link
             $this->crawler->attr('href');
             $this->crawler->attr('rel');
         } catch (\InvalidArgumentException $e) {
-          throw  $e;
-          throw new Exception\UndefinedHypermedia();
-            return false;
+            throw  $e;
         }
 
         return true;
     }
 
     /**
+     * Call request method
      *
      * @param \Bpi\Sdk\Document $document
      */
@@ -98,6 +100,7 @@ class Link
     }
 
     /**
+     * Convert properties to array
      *
      * @return array properties
      */

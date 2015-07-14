@@ -11,12 +11,12 @@ use Symfony\Component\DomCrawler\Crawler;
 class Query
 {
     /**
-     *
-     * @var \Symfony\Component\DomCrawler\Crawler
+     * @var \Symfony\Component\DomCrawler\Crawler document crawler
      */
     protected $crawler;
 
     /**
+     * Initiate object
      *
      * @param \Symfony\Component\DomCrawler\Crawler $crawler
      */
@@ -40,7 +40,6 @@ class Query
             $this->crawler->filter('param');
         } catch (\InvalidArgumentException $e) {
             throw new Exception\UndefinedHypermedia('Query has no href attribute or parameters inside');
-            return false;
         }
 
         return true;

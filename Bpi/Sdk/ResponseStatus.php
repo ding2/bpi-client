@@ -13,7 +13,11 @@ class ResponseStatus
     protected $status;
 
     /**
+     * Initiate object
+     *
      * @param integer $status_code
+     *
+     * @throws \InvalidArgumentException
      */
     public function __construct($status_code)
     {
@@ -23,15 +27,20 @@ class ResponseStatus
             throw new \InvalidArgumentException('Incorrect HTTP status code [' . $status_code . ']');
     }
 
+    /**
+     * Convert current status to string
+     *
+     * @return string with current status
+     */
     public function __toString()
     {
         return (string) $this->status;
     }
 
     /**
-     * Return status code of finished request.
+     * Return status code of finished request
      *
-     * @return string
+     * @return string current status code
      */
     public function getCode()
     {
@@ -39,9 +48,9 @@ class ResponseStatus
     }
 
     /**
-     * Check if request was successful.
+     * Check if request was successful
      *
-     * @return bool
+     * @return bool if status successful
      */
     public function isSuccess()
     {
@@ -49,9 +58,9 @@ class ResponseStatus
     }
 
     /**
-     * Check if error code is client error.
+     * Check if error code is client error
      *
-     * @return bool
+     * @return bool if status code is client error
      */
     public function isClientError()
     {
@@ -59,9 +68,9 @@ class ResponseStatus
     }
 
     /**
-     * Check if error code is server error.
+     * Check if error code is server error
      *
-     * @return bool
+     * @return bool if status code is server error
      */
     public function isServerError()
     {
@@ -69,9 +78,9 @@ class ResponseStatus
     }
 
     /**
-     * Check if error response.
+     * Check if error response
      *
-     * @return bool
+     * @return bool if status code is error
      */
     public function isError()
     {

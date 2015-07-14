@@ -8,9 +8,24 @@ namespace Bpi\Sdk;
  */
 class Authorization
 {
+    /**
+     * @var string agency id
+     */
     protected $agency_id;
+
+    /**
+     * @var string public key used to authorize on rest server
+     */
     protected $public_key;
+
+    /**
+     * @var string secret key used to authorize on rest server
+     */
     protected $secret_key;
+
+    /**
+     * @var string token by which client authorizes on service
+     */
     protected $token;
 
     /**

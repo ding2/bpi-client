@@ -9,7 +9,6 @@ namespace Bpi\Sdk\Template;
 class Field
 {
     /**
-     *
      * @var \DOMNode
      */
     protected $node;
@@ -22,6 +21,8 @@ class Field
     protected $value;
 
     /**
+     * Initiate object
+     *
      * @param \DOMNode $node
      */
     public function __construct(\DOMNode $node)

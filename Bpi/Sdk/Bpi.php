@@ -8,22 +8,22 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 class Bpi
 {
     /**
-     * @var \Goutte\Client
+     * @var \Goutte\Client crawler library
      */
     protected $client;
 
     /**
-     * @var \Bpi\Sdk\Authorization
+     * @var \Bpi\Sdk\Authorization authorization credentials
      */
     protected $authorization;
 
     /**
-     * @var \Bpi\Sdk\Document
+     * @var \Bpi\Sdk\Document url to service
      */
     protected $endpoint;
 
     /**
-     * @var \Bpi\Sdk\Document
+     * @var \Bpi\Sdk\Document current loaded document
      */
     protected $current_document;
 
@@ -148,6 +148,8 @@ class Bpi
      *
      * @param string $dateFrom
      * @param string $dateTo
+     *
+     * @return \Bpi\Sdk\Item\BaseItem
      */
     public function getStatistics($dateFrom, $dateTo)
     {
@@ -213,6 +215,8 @@ class Bpi
     }
 
     /**
+     * Get current document
+     *
      * @return \Bpi\Sdk\Document
      */
     protected function _getCurrentDocument()

@@ -12,17 +12,17 @@ use Symfony\Component\DomCrawler\Crawler;
 class Document implements \Iterator, \Countable
 {
     /**
-     * @var \Goutte\Client
+     * @var \Goutte\Client crawler library
      */
     protected $http_client;
 
     /**
-     * @var \Bpi\Sdk\Authorization
+     * @var \Bpi\Sdk\Authorization authorization credentials
      */
     protected $authorization;
 
     /**
-     * @var \Symfony\Component\DomCrawler\Crawler
+     * @var \Symfony\Component\DomCrawler\Crawler document crawler
      */
     protected $crawler;
 
@@ -37,6 +37,8 @@ class Document implements \Iterator, \Countable
     }
 
     /**
+     * Load web service
+     *
      * @param string $endpoint API URL
      * @return \Bpi\Sdk\Document same instance
      */
@@ -52,6 +54,10 @@ class Document implements \Iterator, \Countable
      * @param string $method
      * @param string $uri
      * @param array $params
+     *
+     * @throws Exception\HTTP\ClientError
+     * @throws Exception\HTTP\ServerError
+     * @throws Exception\HTTP\Error
      *
      * @return \Bpi\Sdk\Document same instance
      */
@@ -93,7 +99,7 @@ class Document implements \Iterator, \Countable
     /**
      * Dump latest raw response data
      *
-     * @return string
+     * @return string response from web service
      */
     public function dumpRawResponse()
     {
@@ -103,7 +109,7 @@ class Document implements \Iterator, \Countable
     /**
      * Dump latest raw request data
      *
-     * @return string
+     * @return string response from wev service
      */
     public function dumpRawRequest()
     {
@@ -225,6 +231,8 @@ class Document implements \Iterator, \Countable
 
     /**
      * Iterates over all properties of current item
+     *
+     * @return closure
      */
     public function walkProperties($callback)
     {
@@ -252,7 +260,7 @@ class Document implements \Iterator, \Countable
     /**
      * Finds first matched item by attribute value
      *
-     * @param string $name
+     * @param string $attr
      * @param mixed $value
      * @throws \InvalidArgumentException
      *
@@ -274,7 +282,7 @@ class Document implements \Iterator, \Countable
     /**
      * Filter items (<item> tags) by attribute values
      *
-     * @param string $name
+     * @param string $attr
      * @param mixed $value
      * @throws \Bpi\Sdk\Exception\EmptyList
      *
@@ -324,6 +332,7 @@ class Document implements \Iterator, \Countable
      * Key of current iteration position
      *
      * @group Iterator
+     * @return string
      */
     function key()
     {
@@ -355,6 +364,7 @@ class Document implements \Iterator, \Countable
      * Length of items in document
      *
      * @group Iterator
+     * @return integer
      */
     public function count()
     {

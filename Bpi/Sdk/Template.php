@@ -21,6 +21,7 @@ class Template
     protected $fields = array();
 
     /**
+     * Initiate object
      *
      * @param \Symfony\Component\DomCrawler\Crawler $crawler
      */
@@ -45,7 +46,6 @@ class Template
             $this->crawler->filter('param');
         } catch (\InvalidArgumentException $e) {
             throw new Exception\UndefinedHypermedia();
-            return false;
         }
 
         return true;
@@ -54,7 +54,7 @@ class Template
     /**
      * Iterate over fields and prepare flat array with data.
      *
-     * @return array
+     * @return array of data
      */
     protected function render()
     {

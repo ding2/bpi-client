@@ -1,7 +1,7 @@
 <?php
 namespace Bpi\Sdk;
 
-use Bpi\Sdk\Document;
+use Bpi\Sdk\Item;
 
 /**
  * Class NodeList interact with list of nodes.
@@ -18,12 +18,12 @@ class NodeList implements \Iterator, \Countable
     public $total = 0;
 
     /**
-     *
-     * @var \Bpi\Sdk\Document
+     * @var \Bpi\Sdk\Document fetched from web service
      */
     protected $document;
 
     /**
+     * Initiate object
      *
      * @param \Bpi\Sdk\Document $document
      */
@@ -59,11 +59,11 @@ class NodeList implements \Iterator, \Countable
      * Returns same instance but with internal pointer to current item in collection
      *
      * @group Iterator
-     * @return \Bpi\Sdk\Document will return same instance
+     * @return \Bpi\Sdk\Item\Node will return same instance
      */
     function current()
     {
-        return new \Bpi\Sdk\Item\Node($this->document->current());
+        return new Node($this->document->current());
     }
 
     /**
@@ -98,6 +98,7 @@ class NodeList implements \Iterator, \Countable
     }
 
     /**
+     * Count documents
      *
      * @return integer
      */
