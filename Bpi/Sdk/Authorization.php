@@ -1,10 +1,9 @@
 <?php
+
 namespace Bpi\Sdk;
 
 /**
  * Class Authorization prepare authorization credentials.
- *
- * @package Bpi\Sdk
  */
 class Authorization
 {
@@ -42,16 +41,16 @@ class Authorization
     }
 
     /**
-     * Generate authorization token
+     * Generate authorization token.
      */
     protected function generateToken()
     {
-        $this->token = crypt($this->agency_id . $this->public_key . $this->secret_key);
+        $this->token = crypt($this->agency_id.$this->public_key.$this->secret_key);
     }
 
     /**
      * Represent as HTTP Authorization string.
-     * Will return value part, e.g. Authorization: <value>
+     * Will return value part, e.g. Authorization: <value>.
      *
      * @return string
      */

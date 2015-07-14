@@ -1,4 +1,5 @@
 <?php
+
 namespace Bpi\Sdk\Item;
 
 /**
@@ -10,17 +11,15 @@ namespace Bpi\Sdk\Item;
 class Node extends BaseItem
 {
     /**
-     * Get node assets (images)
+     * Get node assets (images).
      *
      * @return array
      */
     public function getAssets()
     {
         $result = array();
-        foreach ($this->getProperties() as $key => $val)
-        {
-            if (strpos($key, 'asset') !== FALSE)
-            {
+        foreach ($this->getProperties() as $key => $val) {
+            if (strpos($key, 'asset') !== false) {
                 $result[$key] = $val;
             }
         }

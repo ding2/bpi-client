@@ -1,4 +1,5 @@
 <?php
+
 namespace Bpi\Sdk;
 
 use Symfony\Component\DomCrawler\Crawler;
@@ -6,13 +7,14 @@ use Bpi\Sdk\Exception as Exception;
 
 /**
  * Class Link contain methods which prepare URI for different type of requests.
- *
- * @package Bpi\Sdk
  */
 class Link
 {
     /**
+<<<<<<< HEAD
      * Document crawler
+=======
+>>>>>>> d764d1754304dc514fe2091e57cd64295ad957a2
      * @var \Symfony\Component\DomCrawler\Crawler
      */
     protected $crawler;
@@ -31,7 +33,7 @@ class Link
     }
 
     /**
-     * Try crawler for consistency of data
+     * Try crawler for consistency of data.
      *
      * @throws Exception\UndefinedHypermedia
      *
@@ -60,7 +62,7 @@ class Link
     }
 
     /**
-     * Perform HTTP GET for given URI
+     * Perform HTTP GET for given URI.
      *
      * @param \Bpi\Sdk\Document $document
      */
@@ -70,7 +72,7 @@ class Link
     }
 
     /**
-     * Perform HTTP POST for given URI
+     * Perform HTTP POST for given URI.
      *
      * @param \Bpi\Sdk\Document $document
      */
@@ -80,7 +82,7 @@ class Link
     }
 
     /**
-     * Perform HTTP DELETE for given URI
+     * Perform HTTP DELETE for given URI.
      *
      * @param \Bpi\Sdk\Document $document
      */
@@ -90,7 +92,7 @@ class Link
     }
 
     /**
-     * Perform HTTP PUT for given URI
+     * Perform HTTP PUT for given URI.
      *
      * @param \Bpi\Sdk\Document $document
      */
@@ -107,13 +109,12 @@ class Link
     public function toArray()
     {
         $properties = array();
-        foreach($this->crawler as $node)
-        {
-            foreach ($node->attributes as $attr_name => $attr)
-            {
+        foreach ($this->crawler as $node) {
+            foreach ($node->attributes as $attr_name => $attr) {
                 $properties[$attr_name] = $attr->value;
             }
         }
+
         return $properties;
     }
 }

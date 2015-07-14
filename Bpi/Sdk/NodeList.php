@@ -5,13 +5,11 @@ use Bpi\Sdk\Item;
 
 /**
  * Class NodeList interact with list of nodes.
- *
- * @package Bpi\Sdk
  */
 class NodeList implements \Iterator, \Countable
 {
     /**
-     * Total amount of items on server
+     * Total amount of items on server.
      *
      * @var int
      */
@@ -29,70 +27,70 @@ class NodeList implements \Iterator, \Countable
      */
     public function __construct(Document $document)
     {
-        try
-        {
+        try {
             $this->document = clone $document;
             $this->document->reduceItemsByAttr('type', 'entity');
             $self = $this;
             $document->firstItem('type', 'collection')
-                ->walkProperties(function($property) use ($self) {
-                    $self->$property['name'] = $property['@value'];
-                });
-        }
-        catch (Exception\EmptyList $e)
-        {
+                ->walkProperties(
+                    function ($property) use ($self) {
+                        $self->$property['name'] = $property['@value'];
+                    }
+                );
+        } catch (Exception\EmptyList $e) {
             $this->document->clear();
         }
     }
 
     /**
-     * Iterator interface implementation
+     * Iterator interface implementation.
      *
      * @group Iterator
      */
-    function rewind()
+    public function rewind()
     {
         $this->document->rewind();
     }
 
     /**
-     * Returns same instance but with internal pointer to current item in collection
+     * Returns same instance but with internal pointer to current item in collection.
      *
      * @group Iterator
      * @return \Bpi\Sdk\Item\Node will return same instance
      */
-    function current()
+    public function current()
     {
         return new Node($this->document->current());
     }
 
     /**
-     * Key of current iteration position
+     * Key of current iteration position.
      *
      * @group Iterator
      */
-    function key()
+    public function key()
     {
         return $this->document->key();
     }
 
     /**
-     * Iterate to next item
+     * Iterate to next item.
      *
      * @group Iterator
      */
-    function next()
+    public function next()
     {
         $this->document->next();
     }
 
     /**
-     * Checks if is ready for iteration
+     * Checks if is ready for iteration.
      *
      * @group Iterator
-     * @return boolean
+     *
+     * @return bool
      */
-    function valid()
+    public function valid()
     {
         return $this->document->valid();
     }
@@ -100,9 +98,9 @@ class NodeList implements \Iterator, \Countable
     /**
      * Count documents
      *
-     * @return integer
+     * @return int
      */
-    function count()
+    public function count()
     {
         return $this->document->count();
     }

@@ -1,9 +1,9 @@
 <?php
+
 namespace Bpi\Sdk;
+
 /**
  * Class ResponseStatus check status of response got from WS.
- *
- * @package Bpi\Sdk
  */
 class ResponseStatus
 {
@@ -15,7 +15,7 @@ class ResponseStatus
     /**
      * Initiate object
      *
-     * @param integer $status_code
+     * @param int $status_code
      *
      * @throws \InvalidArgumentException
      */
@@ -23,8 +23,9 @@ class ResponseStatus
     {
         $this->status = (string) $status_code;
 
-        if ($this->status <= 0)
-            throw new \InvalidArgumentException('Incorrect HTTP status code [' . $status_code . ']');
+        if ($this->status <= 0) {
+            throw new \InvalidArgumentException('Incorrect HTTP status code ['.$status_code.']');
+        }
     }
 
     /**

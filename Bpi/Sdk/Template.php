@@ -1,12 +1,11 @@
 <?php
+
 namespace Bpi\Sdk;
 
 use Symfony\Component\DomCrawler\Crawler;
 
 /**
  * Class Template contains methods to render entity.
- *
- * @package Bpi\Sdk
  */
 class Template
 {
@@ -32,7 +31,7 @@ class Template
     }
 
     /**
-     * Try crawler for consistency of data
+     * Try crawler for consistency of data.
      *
      * @throws Exception\UndefinedHypermedia
      *
@@ -40,8 +39,7 @@ class Template
      */
     protected function testConsistency()
     {
-        try
-        {
+        try {
             $this->crawler->attr('href');
             $this->crawler->filter('param');
         } catch (\InvalidArgumentException $e) {
@@ -59,10 +57,10 @@ class Template
     protected function render()
     {
         $data = array();
-        foreach($this->fields as $field)
-        {
+        foreach ($this->fields as $field) {
             $field->assignToList($data);
         }
+
         return $data;
     }
 
@@ -80,12 +78,12 @@ class Template
      * Walk for each field in template.
      *
      * @param callback $callback
+     *
      * @return \Bpi\Sdk\Template
      */
     public function eachField($callback)
     {
-        foreach ($this->crawler->filter('field') as $node)
-        {
+        foreach ($this->crawler->filter('field') as $node) {
             $this->fields[] = $field = new Template\Field($node);
             $callback($field);
         }

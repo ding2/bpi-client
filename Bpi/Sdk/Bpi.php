@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . '/../../vendor/autoload.php';
 
+require_once __DIR__.'/../../vendor/autoload.php';
 
 /**
  * Class Bpi represents methods for requests to REST server.
@@ -28,11 +28,11 @@ class Bpi
     protected $current_document;
 
     /**
-     * Create Bpi Client
+     * Create Bpi Client.
      *
-     * @param string $endpoint URL
-     * @param string $agency_id Agency ID
-     * @param string $api_key App key
+     * @param string $endpoint   URL
+     * @param string $agency_id  Agency ID
+     * @param string $api_key    App key
      * @param string $secret_key
      */
     public function __construct($endpoint, $agency_id, $api_key, $secret_key)
@@ -44,7 +44,7 @@ class Bpi
     }
 
     /**
-     * Create new document
+     * Create new document.
      *
      * @return \Bpi\Sdk\Document
      */
@@ -54,10 +54,11 @@ class Bpi
     }
 
     /**
-     * Get list of node based on conditions
+     * Get list of node based on conditions.
      *
      * @param array $queries available keys are: amount, offset, filter, sort
-     *   filter and sort requires nested arrays
+     *                       filter and sort requires nested arrays
+     *
      * @return \Bpi\Sdk\NodeList
      */
     public function searchNodes(array $queries = array())
@@ -78,10 +79,12 @@ class Bpi
     }
 
     /**
-     * Push new node to BPI
+     * Push new node to BPI.
      *
      * @param array $data of node which will be pushed to service.
+     *
      * @throws \InvalidArgumentException
+     *
      * @return \Bpi\Sdk\Item\Node
      */
     public function push(array $data)
@@ -90,12 +93,15 @@ class Bpi
         $nodes = clone $this->endpoint;
         $nodes->firstItem('name', 'node')
             ->template('push')
-            ->eachField(function ($field) use ($data) {
-                if (!isset($data[(string)$field]))
-                    throw new \InvalidArgumentException(sprintf('Field [%s] is required', (string) $field));
+            ->eachField(
+                function ($field) use ($data) {
+                    if (!isset($data[(string) $field])) {
+                        throw new \InvalidArgumentException(sprintf('Field [%s] is required', (string) $field));
+                    }
 
-                $field->setValue($data[(string) $field]);
-            })->post($node);
+                    $field->setValue($data[(string) $field]);
+                }
+            )->post($node);
 
         $this->current_document = $node;
 
@@ -103,10 +109,11 @@ class Bpi
     }
 
     /**
-     * Mark node as syndicated
+     * Mark node as syndicated.
      *
      * @param string $id BPI node ID
-     * @return boolean operation status
+     *
+     * @return bool operation status
      */
     public function syndicateNode($id)
     {
@@ -123,10 +130,11 @@ class Bpi
     }
 
     /**
-     * Mark node as deleted
+     * Mark node as deleted.
      *
      * @param string $id BPI node ID
-     * @return boolean operation status
+     *
+     * @return bool operation status
      */
     public function deleteNode($id)
     {
@@ -144,7 +152,7 @@ class Bpi
 
     /**
      * Get statistics
-     * Parameterformat: Y-m-d
+     * Parameterformat: Y-m-d.
      *
      * @param string $dateFrom
      * @param string $dateTo
@@ -157,7 +165,7 @@ class Bpi
         $endpoint = clone $this->endpoint;
         $endpoint->firstItem('name', 'node')
             ->query('statistics')
-            ->send($result, array('dateFrom'=>$dateFrom, 'dateTo'=>$dateTo));
+            ->send($result, array('dateFrom' => $dateFrom, 'dateTo' => $dateTo));
 
         $this->current_document = $result;
 
@@ -165,9 +173,10 @@ class Bpi
     }
 
     /**
-     * Get single Node by ID
+     * Get single Node by ID.
      *
      * @param string $id BPI node ID
+     *
      * @return \Bpi\Sdk\Item\Node
      */
     public function getNode($id)
@@ -185,7 +194,7 @@ class Bpi
     }
 
     /**
-     * Get list of dictionaries
+     * Get list of dictionaries.
      *
      * @return array
      */
@@ -201,12 +210,13 @@ class Bpi
         $this->current_document = $result;
 
         $dictionary = array();
-        foreach ($result as $item)
-        {
+        foreach ($result as $item) {
             $properties = array();
-            $item->walkProperties(function($property) use (&$properties){
-                $properties[$property['name']] = $property['@value'];
-            });
+            $item->walkProperties(
+                function ($property) use (&$properties) {
+                    $properties[$property['name']] = $property['@value'];
+                }
+            );
 
             $dictionary[$properties['group']][] = $properties['name'];
         }
